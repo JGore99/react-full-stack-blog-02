@@ -25,9 +25,8 @@ const App = () => {
 	}
 
 	const handleCreateBlog = blogData => {
-		// createBlog(blogData)
-		// .then(newBlogData => setBlogs([...blogs, newBlogData]))
-		setBlogs([...blogs, blogData])
+		createBlog(blogData)
+		.then(newBlogData => setBlogs([...blogs, newBlogData]))
 	}
 
 	return (
