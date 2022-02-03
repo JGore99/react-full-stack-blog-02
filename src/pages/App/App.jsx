@@ -5,6 +5,7 @@ import Signup from '../Signup/Signup'
 import Login from '../Login/Login'
 import Landing from '../Landing/Landing'
 import Users from '../Users/Users'
+import AddBlog from '../AddBlog/AddBlog'
 import * as authService from '../../services/authService'
 
 const App = () => {
@@ -22,15 +23,16 @@ const App = () => {
 	}
 
 	return (
-		<>
+		<main>
 			<NavBar user={user} handleLogout={handleLogout} />
 			<Routes>
 				<Route path='/' element={<Landing user={user} />} />
 				<Route path='/signup' element={<Signup handleSignupOrLogin={handleSignupOrLogin} />} />
 				<Route path='/login' element={<Login handleSignupOrLogin={handleSignupOrLogin} />} />
 				<Route path='/users' element={user ? <Users /> : <Navigate to='/login' />} />
+				<Route path='/addBlog' element={<AddBlog />}/>
 			</Routes>
-		</>
+		</main>
 	);
 }
  
