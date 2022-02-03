@@ -8,6 +8,15 @@ function create(req, res) {
   })
 }
 
+function index(req, res){
+  Blog.find({})
+  .populate('author')
+  .then(blogs => {
+    res.json(blogs)
+  })
+}
+
 export {
-  create
+  create,
+  index
 }

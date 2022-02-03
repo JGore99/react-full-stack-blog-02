@@ -11,6 +11,14 @@ function createBlog(blogData) {
   .then(res => res.json())
 }
 
+function getBlogs() {
+  return fetch(BASE_URL, {
+    headers: {'Authorization': `Bearer ${tokenService.getToken()}`}
+  })
+  .then(res => res.json())
+}
+
 export {
-  createBlog
+  createBlog,
+  getBlogs
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import NavBar from '../../components/NavBar/NavBar'
 import Signup from '../Signup/Signup'
@@ -7,12 +7,17 @@ import Landing from '../Landing/Landing'
 import Users from '../Users/Users'
 import AddBlog from '../AddBlog/AddBlog'
 import * as authService from '../../services/authService'
-import { createBlog } from '../../services/blogService'
+import { createBlog, getBlogs } from '../../services/blogService'
 
 const App = () => {
 	const [user, setUser] = useState(authService.getUser())
 	const [blogs, setBlogs] = useState([])
 	const navigate = useNavigate()
+
+	useEffect(()=>{
+		getBlogs()
+		.then(blogs => setBlogs(blogs))
+	}, [])
 
 	const handleLogout = () => {
 		authService.logout()
