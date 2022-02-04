@@ -8,6 +8,7 @@ import Users from '../Users/Users'
 import AddBlog from '../AddBlog/AddBlog'
 import Blogs from '../Blogs/Blogs'
 import BlogDetails from '../../components/BlogDetails/BlogDetails'
+import EditBlog from '../../components/EditBlog/EditBlog'
 import * as authService from '../../services/authService'
 import { createBlog, getBlogs, deleteBlog } from '../../services/blogService'
 
@@ -54,7 +55,8 @@ const App = () => {
 				<Route path='/users' element={user ? <Users /> : <Navigate to='/login' />} />
 				<Route path='/addBlog' element={<AddBlog handleCreateBlog={handleCreateBlog}/>}/>
 				<Route path='/blogs' element={user ? <Blogs user={user} blogs={blogs} handleDeleteBlog={handleDeleteBlog} /> : <Navigate to='/login' />} />
-				<Route path='/blogDetails' element={<BlogDetails />} />
+				<Route path='/blogDetails' element={<BlogDetails user={user}/>} />
+				<Route path='/editBlog' element={<EditBlog />}/>
 			</Routes>
 		</main>
 	);
