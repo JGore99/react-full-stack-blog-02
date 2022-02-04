@@ -37,9 +37,20 @@ function updateBlog(blogData) {
   .then(res => res.json())
 }
 
+function addComment(commentFormData){
+  return fetch(`${BASE_URL}/${commentFormData.blogId}/comments`, {
+    method: 'POST',
+    headers: {'Authorization': `Bearer ${tokenService.getToken()}`,'Content-Type': 'application/json'
+  },
+    body: JSON.stringify(commentFormData)
+  })
+  .then(res => res.json())
+}
+
 export {
   createBlog,
   getBlogs,
   deleteBlog,
-  updateBlog
+  updateBlog,
+  addComment
 }

@@ -36,9 +36,25 @@ function update(req, res){
   })
 }
 
+function addComment(req, res) {
+  req.body.author = req.user.profile
+  Blog.findByIdAndUpdate(req.params.id)
+  .then(blog => {
+    blog.comments.push(req.body)
+    blog.save()
+    .then(savedBlog => {
+      savedBlog.populate('author')
+      .then(blogToReturn => {
+        res.json(blogToReturn)
+      })
+    })
+  })
+}
+
 export {
   create,
   index,
   deleteBlog as delete,
-  update
+  update,
+  addComment
 }

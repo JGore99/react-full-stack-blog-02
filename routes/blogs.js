@@ -13,5 +13,6 @@ router.use(decodeUserFromToken)
 router.post('/', checkAuth, blogsCtrl.create)
 router.delete('/:id', checkAuth, blogsCtrl.delete)
 router.patch('/:id', checkAuth, blogsCtrl.update)
+router.post('/:id/comments', checkAuth, blogsCtrl.addComment)
 
 export { router }
