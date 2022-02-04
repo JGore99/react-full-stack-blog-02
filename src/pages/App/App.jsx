@@ -6,6 +6,7 @@ import Login from '../Login/Login'
 import Landing from '../Landing/Landing'
 import Users from '../Users/Users'
 import AddBlog from '../AddBlog/AddBlog'
+import Blogs from '../Blogs/Blogs'
 import * as authService from '../../services/authService'
 import { createBlog, getBlogs } from '../../services/blogService'
 
@@ -43,6 +44,7 @@ const App = () => {
 				<Route path='/login' element={<Login handleSignupOrLogin={handleSignupOrLogin} />} />
 				<Route path='/users' element={user ? <Users /> : <Navigate to='/login' />} />
 				<Route path='/addBlog' element={<AddBlog handleCreateBlog={handleCreateBlog}/>}/>
+				<Route path='/blogs' element={<Blogs blogs={blogs} />} />
 			</Routes>
 		</main>
 	);
