@@ -13,7 +13,17 @@ function create(req, res) {
 
 function index(req, res){
   Blog.find({})
-  .populate('author')
+  .populate([
+    {
+      path: 'author'
+    },
+    {
+      path: 'comments',
+      populate: {
+        path: 'author'
+      }
+    }
+  ])
   .then(blogs => {
     res.json(blogs)
   })
@@ -43,7 +53,18 @@ function addComment(req, res) {
     blog.comments.push(req.body)
     blog.save()
     .then(savedBlog => {
-      savedBlog.populate('author')
+      savedBlog
+      .populate([
+        {
+          path: 'author'
+        },
+        {
+          path: 'comments',
+          populate: {
+            path: 'author'
+          }
+        }
+      ])
       .then(blogToReturn => {
         res.json(blogToReturn)
       })

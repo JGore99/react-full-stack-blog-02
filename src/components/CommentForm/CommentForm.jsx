@@ -31,7 +31,6 @@ const CommentForm = (props) => {
 
   return ( 
     <>
-      <h2>Comment:</h2>
       <form
         autoComplete='off'
         onSubmit={handleSubmit}
