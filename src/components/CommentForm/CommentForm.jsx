@@ -18,6 +18,7 @@ const CommentForm = (props) => {
     e.preventDefault()
     try {
       props.handleAddComment(formData)
+      setFormData({content: '', blogId: props.blogId})
     } catch (err) {
       console.log(err)
     }
