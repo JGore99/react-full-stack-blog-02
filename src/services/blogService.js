@@ -27,8 +27,19 @@ function deleteBlog(id) {
   .then(res => res.json())
 }
 
+function updateBlog(blogData) {
+  return fetch(` ${BASE_URL}/${blogData.id}`, {
+    method: 'PATCH',
+    headers: {'Authorization': `Bearer ${tokenService.getToken()}`,'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(blogData)
+  })
+  .then(res => res.json())
+}
+
 export {
   createBlog,
   getBlogs,
-  deleteBlog
+  deleteBlog,
+  updateBlog
 }

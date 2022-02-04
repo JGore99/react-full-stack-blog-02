@@ -26,8 +26,19 @@ function deleteBlog(req, res){
   })
 }
 
+function update(req, res){
+  Blog.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then(updatedBlog => {
+    updatedBlog.populate('author')
+    .then(blog => {
+      res.json(blog)
+    })
+  })
+}
+
 export {
   create,
   index,
-  deleteBlog as delete
+  deleteBlog as delete,
+  update
 }

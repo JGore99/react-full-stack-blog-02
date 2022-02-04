@@ -54,7 +54,7 @@ const  AddBlog = (props) => {
         onChange={handleChange}
       />
       <br/>
-      <button disabled={isFormInvalid()}>Sign Up</button>
+      <button disabled={isFormInvalid()}>Post</button>
         <Link to="/">
           <button>Cancel</button>
         </Link>

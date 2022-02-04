@@ -10,7 +10,7 @@ import Blogs from '../Blogs/Blogs'
 import BlogDetails from '../../components/BlogDetails/BlogDetails'
 import EditBlog from '../../components/EditBlog/EditBlog'
 import * as authService from '../../services/authService'
-import { createBlog, getBlogs, deleteBlog } from '../../services/blogService'
+import { createBlog, getBlogs, deleteBlog, updateBlog } from '../../services/blogService'
 
 const App = () => {
 	const [user, setUser] = useState(authService.getUser())
@@ -42,7 +42,15 @@ const App = () => {
 		.then(deletedBlog => {
 			setBlogs(blogs.filter(blog => blog._id !== deletedBlog._id))
 		})
-		
+	}
+
+	const handleUpdateBlog = blogData => {
+		updateBlog(blogData)
+		.then(updatedBlogData => {
+			const newBlogArray = blogs.map(blog => blog._id === updatedBlogData._id ? updatedBlogData : blog)
+			setBlogs(newBlogArray)
+			navigate('/blogs')
+		})
 	}
 
 	return (
@@ -56,7 +64,7 @@ const App = () => {
 				<Route path='/addBlog' element={<AddBlog handleCreateBlog={handleCreateBlog}/>}/>
 				<Route path='/blogs' element={user ? <Blogs user={user} blogs={blogs} handleDeleteBlog={handleDeleteBlog} /> : <Navigate to='/login' />} />
 				<Route path='/blogDetails' element={<BlogDetails user={user}/>} />
-				<Route path='/editBlog' element={<EditBlog />}/>
+				<Route path='/editBlog' element={<EditBlog handleUpdateBlog={handleUpdateBlog} />}/>
 			</Routes>
 		</main>
 	);
