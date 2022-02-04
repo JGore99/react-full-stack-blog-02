@@ -19,7 +19,15 @@ function index(req, res){
   })
 }
 
+function deleteBlog(req, res){
+  Blog.findByIdAndDelete(req.params.id)
+  .then(blog => {
+    res.json(blog)
+  })
+}
+
 export {
   create,
-  index
+  index,
+  deleteBlog as delete
 }

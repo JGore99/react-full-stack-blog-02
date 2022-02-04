@@ -8,7 +8,7 @@ import Users from '../Users/Users'
 import AddBlog from '../AddBlog/AddBlog'
 import Blogs from '../Blogs/Blogs'
 import * as authService from '../../services/authService'
-import { createBlog, getBlogs } from '../../services/blogService'
+import { createBlog, getBlogs, deleteBlog } from '../../services/blogService'
 
 const App = () => {
 	const [user, setUser] = useState(authService.getUser())
@@ -35,6 +35,14 @@ const App = () => {
 		.then(newBlogData => setBlogs([...blogs, newBlogData]))
 	}
 
+	const handleDeleteBlog = id => {
+		deleteBlog(id)
+		.then(deletedBlog => {
+			setBlogs(blogs.filter(blog => blog._id !== deletedBlog._id))
+		})
+		
+	}
+
 	return (
 		<main>
 			<NavBar user={user} handleLogout={handleLogout} />
@@ -44,7 +52,7 @@ const App = () => {
 				<Route path='/login' element={<Login handleSignupOrLogin={handleSignupOrLogin} />} />
 				<Route path='/users' element={user ? <Users /> : <Navigate to='/login' />} />
 				<Route path='/addBlog' element={<AddBlog handleCreateBlog={handleCreateBlog}/>}/>
-				<Route path='/blogs' element={<Blogs blogs={blogs} />} />
+				<Route path='/blogs' element={user ? <Blogs user={user} blogs={blogs} handleDeleteBlog={handleDeleteBlog} /> : <Navigate to='/login' />} />
 			</Routes>
 		</main>
 	);

@@ -3,17 +3,18 @@ const Blogs = (props) => {
 
     <>
     <h1>Blogs!</h1>
-    <div class="row">
+    <div className="row">
       {props.blogs.map(blog => 
-        <div class="col-sm-6">
-        <div class="card">
-          <div class="card-header">
+        <div key={blog._id} className="col-sm-6">
+        <div className="card">
+          <div className="card-header">
             - {blog.author.name}
           </div>
-          <div class="card-body">
-            <h5 class="card-title">{blog.title}</h5>
-            <p class="card-text">{blog.content.substring(0,30)}...</p>
-            <a href="#" class="btn btn-primary">Details</a>
+          <div className="card-body">
+            <h5 className="card-title">{blog.title}</h5>
+            <p className="card-text">{blog.content.substring(0,30)}...</p>
+            <a href="#" className="btn btn-primary">Details</a>
+            {(props.user.profile === blog.author._id) && <button onClick={() =>{props.handleDeleteBlog(blog._id)}} className="btn btn-danger">Delete</button>}  
           </div>
         </div>
       </div>
